@@ -1,6 +1,8 @@
 package com.run.simple.array.simple;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @Author:         linmeng
@@ -15,12 +17,48 @@ package com.run.simple.array.simple;
 public class RemoveDuplicatesArray {
 
     public static void main(String[] args) {
-        int [] nums1={0};
-        int [] nums2={1};
-
-        merge(nums1,0,nums2,1);
+        List<List<Integer>> generate = generate(4);
+        int a=0;
     }
 
+    /**
+    
+    * 给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+    * @author      作者姓名
+    * @param numRows 杨辉三角的边长
+    * @return      
+    * @exception   
+    * @date        2019/5/30 22:38
+    */
+    public static List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> lists = new ArrayList<>(numRows);
+        if (numRows==1){
+            List<Integer> list = new ArrayList<>();
+            list.add(1);
+            lists.add(list);
+            return lists;
+        }
+        if (numRows == 2){
+            List<Integer> list = new ArrayList<>();
+            list.add(1);
+            lists.add(list);
+            list = new ArrayList<>();
+            list.add(1);list.add(1);
+            lists.add(list);
+        }
+
+        for (int i=2;i<numRows;i++){
+            List<Integer> list= new ArrayList<>();
+            list.add(1);
+            for (int j=1;j<i;j++){
+                list.add(lists.get(i-1).get(j-1)+lists.get(i-1).get(j));
+            }
+            list.add(1);
+            lists.add(list);
+        }
+        return lists;
+    }
+    
   public class TreeNode {
       int val;
       TreeNode left;
