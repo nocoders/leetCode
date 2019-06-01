@@ -2,6 +2,7 @@ package com.run.simple.array.simple;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,9 +18,11 @@ import java.util.List;
 public class RemoveDuplicatesArray {
 
     public static void main(String[] args) {
-        List<List<Integer>> generate = generate(4);
-        int a=0;
+        int [] a={1,1,4,2,1,3};
+        int b=heightChecker(a);
+        System.out.println(b);
     }
+
 
     /**
     
@@ -57,6 +60,29 @@ public class RemoveDuplicatesArray {
             lists.add(list);
         }
         return lists;
+    }
+
+    /**
+    
+    * 获取将无序数组转换为有序数组的必要移动数据个数
+     *  先获取有序数组，然后循环判断两个数组的数据不同的地方
+    * @author      linmeng
+    * @param heights 无序数组
+    * @return      
+    * @exception   
+    * @date        2019/6/1 21:20
+    */
+    public static int heightChecker(int[] heights) {
+        int[] tmp = heights.clone();
+
+        Arrays.sort(tmp);
+        int res=0;
+        for (int i=0;i<heights.length;i++){
+            if (heights[i]!=tmp[i]){
+                res++;
+            }
+        }
+        return res;
     }
     
   public class TreeNode {
