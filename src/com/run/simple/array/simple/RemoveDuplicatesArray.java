@@ -23,6 +23,59 @@ public class RemoveDuplicatesArray {
         System.out.println(b);
     }
 
+    /**在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。
+     返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i < j 且有 (time[i] + time[j]) % 60 == 0。
+    * 方法实现说明:将数组 对 60求余  然后循环判断余数相加是否同60求余为0
+    * @TODO 超时，题解看不懂
+     * @author      linmeng
+    * @param time
+    * @return
+    * @exception
+    * @date        2019/6/7 15:01
+    */
+    public int numPairsDivisibleBy60(int[] time) {
+        for (int i:time){
+            i=i%60;
+        }
+        int res=0;
+        for (int i=0;i< time.length;i++){
+            for (int j=i+1;j<time.length;j++){
+                if ((time[i]+time[j])%60==0){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     给定一个整数数组 A，只有我们可以将其划分为三个和相等的非空部分时才返回 true，否则返回 false。
+     形式上，如果我们可以找出索引 i+1 < j 且满足 (A[0] + A[1] + ... + A[i] == A[i+1] + A[i+2] + ... + A[j-1] == A[j] + A[j-1] + ... + A[A.length - 1]) 就可以将数组三等分。
+    * 方法实现说明:求和，求是否有平均数，有就去获取第一个小数组，在获取第二个第三个
+    * @author      作者姓名
+    * @param A
+    * @return
+    * @exception
+    * @date        2019/6/7 11:04
+    */
+    public boolean canThreePartsEqualSum(int[] A) {
+        //  数组求和
+        int sum=0,avg=0;
+        for (int i:A){sum+=i;}
+
+        if (sum%3 !=0){return false;}
+        avg =sum/3; sum=0;
+        for (int i=0,j=0;i<A.length;i++){
+            sum = sum+A[i];
+            if (avg==sum){
+                j++;sum=0;
+                if (j==3){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
     
@@ -34,31 +87,28 @@ public class RemoveDuplicatesArray {
     * @date        2019/5/30 22:38
     */
     public static List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> lists = new ArrayList<>(numRows);
-        if (numRows==1){
-            List<Integer> list = new ArrayList<>();
+        List<List<Integer>> lists = new ArrayList<>();
+        // 判断 numRows是否为0
+        if (numRows==0){return lists;}
+        List<Integer> a=new ArrayList<>();
+        a.add(1);
+
+        // 第一行数据一直为1
+        lists.add(a);
+
+        for (int i=1;i<numRows;i++){
+            // 第i行的 数据
+            List<Integer> list= new ArrayList<>();
+            List<Integer> provList=lists.get(i-1);
             list.add(1);
-            lists.add(list);
-            return lists;
-        }
-        if (numRows == 2){
-            List<Integer> list = new ArrayList<>();
+            for (int j=1;j<i;j++){
+                list.add(provList.get(j-1)+provList.get(j));
+            }
             list.add(1);
-            lists.add(list);
-            list = new ArrayList<>();
-            list.add(1);list.add(1);
+
             lists.add(list);
         }
 
-        for (int i=2;i<numRows;i++){
-            List<Integer> list= new ArrayList<>();
-            list.add(1);
-            for (int j=1;j<i;j++){
-                list.add(lists.get(i-1).get(j-1)+lists.get(i-1).get(j));
-            }
-            list.add(1);
-            lists.add(list);
-        }
         return lists;
     }
 
