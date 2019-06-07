@@ -3,6 +3,7 @@ package com.run.simple.array.simple;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,9 +19,11 @@ import java.util.List;
 public class RemoveDuplicatesArray {
 
     public static void main(String[] args) {
-        int [] a={1,1,4,2,1,3};
-        int b=heightChecker(a);
-        System.out.println(b);
+        int a =Integer.MAX_VALUE;
+        int [] aa={0,3,8,6,8,6,6,8,2,0,2,7};
+        int i = maxProfit(aa);
+        System.out.println(i);
+
     }
 
     /**在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。
@@ -75,6 +78,52 @@ public class RemoveDuplicatesArray {
             }
         }
         return false;
+    }
+    
+    /**
+     给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+     如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+     注意你不能在买入股票前卖出股票
+    * 方法实现说明:遍历数组，先判断最小值，再判断数组同最小值差是否大于最大值。
+    * @author      作者姓名
+    * @param prices
+    * @return      
+    * @exception   
+    * @date        2019/6/7 21:04
+    */
+    public static int maxProfit(int[] prices) {
+        int min=Integer.MAX_VALUE,max=0;
+        for (int i=0;i<prices.length;i++){
+            if (min>prices[i]){
+                min=prices[i];
+            }else if (prices[i]-min>max){
+                max=prices[i]-min;
+            }
+        }
+
+        return max;
+    }
+
+    /**
+        获取杨辉三角的第rowIndex层
+    * 方法实现说明：
+     * @TODO 搞不懂
+    * @author      作者姓名
+    * @param null
+    * @return
+    * @exception
+    * @date        2019/6/7 16:31
+    */
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer>list=new LinkedList<>();
+        if (rowIndex==0){return list;}
+        // 将第一行添加进去
+        list.add(1);
+
+        for (int i=1;i<rowIndex;i++){
+
+        }
+        return null;
     }
 
     /**
