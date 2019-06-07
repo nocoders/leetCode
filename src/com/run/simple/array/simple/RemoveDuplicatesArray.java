@@ -62,6 +62,27 @@ public class RemoveDuplicatesArray {
         return lists;
     }
 
+
+    /**
+
+    * 方法实现说明：数组从索引0开始，在后面添加数字，相当于之前的数字乘2再加
+    * @author      linmeng
+    * @param A 二进制 数组
+    * @return
+    * @exception
+    * @date        2019/6/7 10:35
+    */
+    public List<Boolean> prefixesDivBy5(int[] A) {
+            List<Boolean> list = new ArrayList<>(A.length);
+            int res=0;
+            for(int i:A){
+                res=(res<<1)%5+(i==1?1:0);
+                list.add(res%5==0);
+            }
+
+            return list;
+    }
+
     /**
     
     * 获取将无序数组转换为有序数组的必要移动数据个数
