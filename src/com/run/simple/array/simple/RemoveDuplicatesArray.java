@@ -28,8 +28,7 @@ public class RemoveDuplicatesArray {
 
     /**在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。
      返回其总持续时间（以秒为单位）可被 60 整除的歌曲对的数量。形式上，我们希望索引的数字  i < j 且有 (time[i] + time[j]) % 60 == 0。
-    * 方法实现说明:将数组 对 60求余  然后循环判断余数相加是否同60求余为0
-    * @TODO 超时，题解看不懂
+    * 方法实现说明:将数组 对 60求余  ,求余 为  0 和 30的 为一种，其他1-29位一种
      * @author      linmeng
     * @param time
     * @return
@@ -37,18 +36,20 @@ public class RemoveDuplicatesArray {
     * @date        2019/6/7 15:01
     */
     public int numPairsDivisibleBy60(int[] time) {
-        for (int i:time){
-            i=i%60;
+        int count = 0;
+        //2.方法二：创建一个包含六十个元素的数组，将模60的结果存入
+        int temp[] = new int[60];
+        for(int i = 0 ; i < time.length; i++){
+            temp[time[i] % 60]++;
         }
-        int res=0;
-        for (int i=0;i< time.length;i++){
-            for (int j=i+1;j<time.length;j++){
-                if ((time[i]+time[j])%60==0){
-                    res++;
-                }
-            }
+        // 获取 求余为 0.和30 的数量
+        count=count + temp[0]*(temp[0]-1)/2 + temp[30]*(temp[30]-1)/2;
+        // 因为 求 两数和为60  的只需要求 1-29的，不需要求两遍
+        for (int i=1;i<30;i++){
+            count = count + temp[i]*temp[60-i];
         }
-        return res;
+
+        return count ;
     }
 
     /**
