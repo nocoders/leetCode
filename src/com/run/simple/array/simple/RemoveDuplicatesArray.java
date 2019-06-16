@@ -19,11 +19,46 @@ import java.util.List;
 public class RemoveDuplicatesArray {
 
     public static void main(String[] args) {
-        int a =Integer.MAX_VALUE;
-        int [] aa={0,3,8,6,8,6,6,8,2,0,2,7};
-        int i = maxProfit(aa);
-        System.out.println(i);
 
+    }
+
+    /**
+     给定仅有小写字母组成的字符串数组 A，返回列表中的每个字符串中都显示的全部字符（包括重复字符）组成的列表。例如，如果一个字符在每个字符串中出现 3 次，但不是 4 次，则需要在最终答案中包含该字符 3 次。
+     你可以按任意顺序返回答案。
+    * 方法实现说明 首先，将第一个字符串中的字符 各个字母出现次数 作为值存入 另一个数组中（该数组以0-25)为下标
+     *          然后再使用一个临时数组，存入其他 字符串中各个字母的长度，最后取最小的数据放入上面的数组中
+    * @author      linmeng
+    * @param A 字符串数组
+    * @return
+    * @exception
+    * @date        2019/6/9 18:50
+    */
+    public static List<String> commonChars(String[] A) {
+        int [] res = new int[26];
+        if (A.length<=0 ){
+            return null;
+        }
+        for (char a:A[0].toCharArray()){
+            res[a-97]++;
+        }
+
+        for (int i=1;i<A.length;i++){
+            int [] tmp=new int[26];
+            for (char a:A[i].toCharArray()){
+                tmp[a-97]++;
+            }
+            for (int j=0;j<tmp.length;j++){
+                res[j]=(res[j]>tmp[j])?tmp[j]:res[j];
+            }
+        }
+
+        List<String> result = new ArrayList<>();
+        for (int i=0;i<res.length;i++){
+            for (int j=0;j<res[i];j++){
+                result.add(String.valueOf((char)(i+97)));
+            }
+        }
+        return result;
     }
 
     /**在歌曲列表中，第 i 首歌曲的持续时间为 time[i] 秒。
