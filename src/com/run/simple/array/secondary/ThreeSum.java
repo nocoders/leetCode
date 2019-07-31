@@ -1,5 +1,7 @@
 package com.run.simple.array.secondary;
 
+import com.run.hard.Array;
+
 import java.util.*;
 
 /**
@@ -19,8 +21,8 @@ import java.util.*;
  */
 public class ThreeSum {
     public static void main(String[] args) {
-        int[] nums = {-1,0,1,1,55};
-        Integer  a= threeSumClosest(nums,3);
+        int[] nums = {-1,0,-5,-2,-2,-4,0,1,-2};
+        List<List<Integer>> lists = fourSum(nums, -9);
         System.out.println();
     }
 
@@ -118,6 +120,77 @@ public class ThreeSum {
                 i++;
                 while (nums[i] == nums[i - 1] && i < nums.length - 2) {
                     i++;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+    * @Description:    四数之和
+    * @Author:         linmeng
+     * @param nums 传入数组
+     * @param target 目标值（和）
+     * @return {@link List<List<Integer>>}
+    * @CreateDate:     2019/7/18 22:36
+    * @UpdateUser:     linmeng
+    * @UpdateDate:     2019/7/18 22:36
+    * @UpdateRemark:   修改内容
+    * @Version:        1.0
+
+    */
+    static List<List<Integer>> fourSum(int[] nums, int target) {
+
+        List<List<Integer>> res = new ArrayList<>();
+        // 判断数组长度是否大于3
+        if (nums.length<4){
+            return res;
+        }
+        // 对数组排序
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i=0;i<n-3;i++){
+            // 第一个数去重
+            if (i>0 && nums[i]==nums[i-1]){
+                continue;
+            }
+            // 从i开始的四个数如果大于target，说明后面的数都大于target，直接结束循环
+            if (nums[i]+nums[i+1]+nums[i+2]+nums[i+3]>target){
+                break;
+            }
+            // i加上n n-1 n-2 n-3 若是还小于 target，以i开始的所有的数 都小于 target，
+            if (nums[i]+nums[n-1]+nums[n-2]+nums[n-3]<target){
+                continue;
+            }
+            for (int j=i+1;j<n-2;j++){
+                // 第二个数去重
+                if (j-i>1 && nums[j]==nums[j-1]){
+                    continue;
+                }
+                // 去除第二个数中的不可能项
+                if (nums[i]+nums[j]+nums[j+1]+nums[j+2]>target){
+                    break;
+                }
+                if (nums[i]+nums[j]+nums[n-2]+nums[n-1]<target){
+                    continue;
+                }
+                int k=j+1,l=n-1;
+                while (k<l){
+                    // 判断第三个数是否相同
+                    if (k-j>1 && nums[k]==nums[k-1]){
+                        k++;
+                        continue;
+                    }
+                    int sum = nums[i]+nums[j]+nums[k]+nums[l];
+                    if (sum>target){
+                        l--;
+                    }else if (sum<target){
+                        k++;
+                    }else {
+                        res.add(Arrays.asList(nums[i],nums[j],nums[k],nums[l]));
+                        l--;
+                        k++;
+                    }
                 }
             }
         }
