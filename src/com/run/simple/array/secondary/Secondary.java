@@ -2,6 +2,7 @@ package com.run.simple.array.secondary;
 
 import com.run.hard.Array;
 
+import javax.print.attribute.standard.NumberUp;
 import java.util.*;
 
 /**
@@ -19,11 +20,58 @@ import java.util.*;
  * @UpdateRemark: 修改内容
  * @Version: 1.0
  */
-public class ThreeSum {
+public class Secondary {
     public static void main(String[] args) {
         int[] nums = {-1,0,-5,-2,-2,-4,0,1,-2};
         List<List<Integer>> lists = fourSum(nums, -9);
         System.out.println();
+    }
+    
+
+    /**
+    * @Description:    找到下一个最大排列
+    * @Author:         linmeng
+    * @CreateDate:     2019/8/1 20:22
+    * @UpdateUser:     linmeng
+    * @UpdateDate:     2019/8/1 20:22
+    * @UpdateRemark:   修改内容
+
+    * @Version:        1.0
+    */
+    public void nextPermutation(int[] nums) {
+        // 判断该数组是否为最大排列数组
+        int i =nums.length-2;
+        // 从右至左进行检查看是否有左边比右边大的
+        while (i>=0  && nums[i+1]<=nums[i]){
+            i--;
+        }
+        // 判断 i是否为0
+        if (i>=0){
+            int j=nums.length-1;
+            // 检查到后，再从后往前循环，获取比该数大但是最小的数
+            while (nums[i]>=nums[j]){
+                j--;
+            }
+            // 替换 两数
+            swap(nums,i,j);
+        }
+       // 从i+1开始，将后面的数组替换
+        reverse(nums,i+1);
+
+    }
+
+    static void reverse(int[] nums,int start){
+        int i=start,j=nums.length-1;
+        while (i<j){
+            swap(nums,i,j);
+            i++;
+            j--;
+        }
+    }
+    static void swap(int[] nums,int i,int j){
+        int tmp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=tmp;
     }
 
     /**
