@@ -1,8 +1,6 @@
-package com.run.simple.array.secondary;
+package com.run.leetcode.array.secondary;
 
-import com.run.hard.Array;
 
-import javax.print.attribute.standard.NumberUp;
 import java.util.*;
 
 /**

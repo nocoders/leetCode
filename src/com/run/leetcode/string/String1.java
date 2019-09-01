@@ -1,4 +1,4 @@
-package com.run.simple.string;
+package com.run.leetcode.string;
 
 /**
  * @Description: leetCode String 简单问题

@@ -1,4 +1,4 @@
-package com.run.simple.array.secondary;
+package com.run.leetcode.array.secondary;
 
 import java.util.*;
 
